@@ -95,4 +95,73 @@ public class TodoRepositoryTests {
             log.info(todo);
         });
     }
+
+    @Test
+    public void testRecusion() {
+        System.out.println(palindromeCheck("sitonapanotis"));
+//        System.out.println(recursionOperator(1,10,"*"));
+//        System.out.println(fibonacci(13,0,1));
+//        System.out.println(fibonacci2(15));
+//        System.out.println(plus(10));
+//        System.out.println(multi(10));
+    }
+    public int multi(int a) {
+        if(a == 1) {
+            return a;
+        } else {
+            return multi(a-1)*a;
+        }
+    }
+    public int plus(int a) {
+        if(a == 0) {
+            return a;
+        } else {
+            return plus(a-1)+a;
+        }
+    }
+    public int fibonacci(int count, int prevNum, int currNum) {
+        System.out.print(currNum+ " ");
+        if(count > 1) {
+            return prevNum+fibonacci(count-1,currNum,currNum+prevNum);
+        } else {
+            return prevNum+1;
+        }
+    }
+    public int fibonacci2(int count) {
+        if(count == 1 || count == 2) {
+            return 1;
+        }
+        return fibonacci2(count-2) + fibonacci2(count-1);
+    }
+    public int recursionOperator(int start, int end, String operator) {
+        if(start < end) {
+            if(operator.equals("+")) {
+                return start + recursionOperator(start+1,end,operator);
+            } else if (operator.equals("-")) {
+                return -1*start + recursionOperator(start+1,end,operator);
+            } else if (operator.equals("*")) {
+                return start * recursionOperator(start+1,end,operator);
+            } else if (operator.equals("/")) {
+                if(start > 0) {
+                    return start / recursionOperator(start+1,end,operator);
+                } else {
+                    return 0;
+                }
+            }
+        }
+        if(operator.equals("-")) {
+            return start*-1;
+        }
+        return start;
+    }
+
+    public boolean palindromeCheck(String s){
+        if(s.length() == 0 || s.length() == 1) {
+            return true;
+        }
+        if(s.charAt(0) == s.charAt(s.length()-1)) {
+            return palindromeCheck(s.substring(1, s.length()-1));
+        }
+        return false;
+    }
 }
